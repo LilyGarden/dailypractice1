@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta lang="en" charset="UTF-8">
+		<title>随机产生格言</title>
+		<script type="text/javascript">
+			function getQuote(){
+				quotes=new Array(4);
+				sources= new Array(4);
+				
+				quotes[0]="When I was a boy of 14, my father was so "+
+				"ignorant... but when I got to be 21,I was astonished "+
+				"at how much he had learned in 7 years.";
+				sources[0]="Mark Twin";
+				quotes[1]="Everybody is ignorant. Only on different "+
+				"subjects.";
+				sources[1]="Will Rogers";
+				quotes[2]="They say such nice things about people at "+
+				"their funerals that it makes me sad that I'm going to "+
+				"miss mine by just a few days.";
+				sources[2]="Garrision Keilor";
+				quotes[3]="What's another word for thesaurus?";
+				sources[3]="Steven Wright";
+				
+				i = Math.floor(Math.random()*quotes.length);
+				
+				document.write("<dl style='background-color:lightpink'>\n");
+				document.write("<dt>"+"\"<em>"+quotes[i]+"<em>\"\n");
+				document.write("<dd>"+"-"+sources[i]+"\n");
+				document.write("<dl>\n");
+			}
+			function outtest(){
+				alert("自我调用测试！！！");
+				//可以实现反复调用这个方法, this.outtest()也可以实现
+				//一般不这样使用，会延迟网页的加载速度
+				//outtest();
+			}
+			function showTime(){
+				var today=new Date();
+				var h=today.getHours();
+				var m=today.getMinutes();
+				var s=today.getSeconds();
+				m=checkTime(m);
+				s=checkTime(s);
+				document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+				setTimeout('showTime()',500);
+			}
+			function checkTime(i){
+				if(i<10){
+					i="0"+i;
+				}
+				return i;
+			}
+			var c=0;
+			var t;
+			function timeCount(){
+				document.getElementById('txt1').value=c;
+				c=c+1;
+				t=setTimeout('timeCount()',1000);
+			}
+			function timeStop(){
+				document.getElementById('txt1').value="";
+				c=0;
+				clearTimeout(t);
+			}
+		</script>
+	</head>
+	<body>
+		<h1>Quotable Quotes</h1>
+		<p>Following is a random quotable . To see a new quote just reload this page.</p>
+		<input type="button" value="自我调用测试" onclick="outtest()"/>
+		<div id="txt"></div>
+		<input type="button" value="开始计时" onclick="timeCount()"/>
+		<input type="text" id="txt1"/>
+		<input type="button" value="停止计时" onclick="timeStop()"/>
+		<script type="text/javascript">
+			getQuote();
+			showTime();
+		</script>
+	</body>
+</html>
